@@ -47,10 +47,12 @@ To display ASCII art using Figurine, run the `figurine` command followed by the 
 figurine penguin
 ```
 
-This will display the ASCII art for a penguin. You can find more ASCII art files in the `/usr/local/share/figurine` directory.
+This will display the ASCII text for the word penguin. You can find more ASCII art files in the `/usr/local/share/figurine` directory.
 
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)
 
 ## Acknowledgements
+
 [ironicbadger](https://github.com/ironicbadger)
