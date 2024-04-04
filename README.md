@@ -4,6 +4,9 @@ This was inspired by Alex's [Youtube Video](https://youtu.be/GPQ6k2GR17I?si=aThv
 
 The script installs the Figurine package, which displays ASCII art text in your terminal. The script downloads the Figurine package, installs it, and configures it to display a greeting message when you log in to your shell.
 
+> [!NOTE]
+> The script will install the `amd64` version of the Figurine package. If you are using a different architecture, you can change the download URL in the script to match your system.
+
 ## Prerequisites
 
 - Linux OS: This script is designed for Linux operating systems.
