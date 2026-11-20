@@ -5,39 +5,66 @@ This was inspired by Alex's [Youtube Video](https://youtu.be/GPQ6k2GR17I?si=aThv
 The script installs the Figurine package, which displays ASCII art text in your terminal. The script downloads the Figurine package, installs it, and configures it to display a greeting message when you log in to your shell.
 
 > [!NOTE]
-> The script will install the `amd64` version of the Figurine package. If you are using a different architecture, you can change the download URL in the script to match your system.
+> The script detects your architecture and installs the matching Figurine build (`amd64`, `arm64`, or 32-bit `arm`).
 
 ## Prerequisites
 
 - Linux OS: This script is designed for Linux operating systems.
 - Root Access: The script requires root access to move files to system directories (`/usr/local/bin/` and `/etc/profile.d/`).
-- wget and tar: These tools must be installed on your system to download and unpack the Figurine package.
+- curl or wget, and tar: Needed to download and unpack the Figurine package.
 
 ## Screenshots
 
-[![Image from Gyazo](https://i.gyazo.com/492f779e3391efda8f32f4521d89437f.png)](https://gyazo.com/492f779e3391efda8f32f4521d89437f)
+[![screenshot](./.github/assets/mux.png)](./.github/assets/mux.png)
 
 ## Installation
 
-1. Download the installation script:
+Run with curl:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/alexraskin/figurine-shell/main/install.sh | sudo bash
+```
+
+Or with wget:
+
+```bash
+wget -qO- https://raw.githubusercontent.com/alexraskin/figurine-shell/main/install.sh | sudo bash
+```
+
+Prefer to inspect it first? Download, read, then run:
 
 ```bash
 wget https://raw.githubusercontent.com/alexraskin/figurine-shell/main/install.sh
+less install.sh
+sudo bash install.sh
 ```
 
-2. Make the script executable:
+Restart your shell session to see the greeting message.
+
+### Nix
+
+Try it without installing:
 
 ```bash
-chmod +x install.sh
+nix run github:alexraskin/figurine-shell -- -f 3d.flf hello
 ```
 
-3. Run the script with root privileges:
+On NixOS, add the flake input and enable the module:
 
-```bash
-sudo ./install.sh 
+```nix
+{
+  inputs.figurine-shell.url = "github:alexraskin/figurine-shell";
+
+  outputs = { nixpkgs, figurine-shell, ... }: {
+    nixosConfigurations.myhost = nixpkgs.lib.nixosSystem {
+      modules = [
+        figurine-shell.nixosModules.default
+        { programs.figurine.enable = true; } # optional: programs.figurine.font = "3d.flf";
+      ];
+    };
+  };
+}
 ```
-
-4. Restart your shell session to see the greeting message.
 
 ## Usage
 
